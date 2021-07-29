@@ -4,11 +4,18 @@ import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import reportWebVitals from './reportWebVitals';
+import MyComponent from './components/myComponent';
+import SignIn from './components/pages/signin';
+import Login from './components/pages/login';
+import App1 from './App1';
 
 
 ReactDOM.render(
 
-  <App />
+ // <Logon />
+ <App1 />
+ //<Login/>
+ // <MyComponent />
   ,
   document.getElementById('root')
 );

@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import logo from '../assets/logo.jpg';
 import { Link } from 'react-router-dom';
+import './navbar.css';
 
 class NavBar extends Component {
+
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleLogout.bind(this);
+      }
+
+      handleLogout=e=>{
+            this.props.Logout();
+      }
+
+    
+
 
     render() {
         return (
@@ -24,10 +37,18 @@ class NavBar extends Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">EA Commercial Resources</Link>
                             </li>
+                           
+
 
                         </ul>
+                        
+                        <div className="logout-btn-cont">
+                            <button type="button" className="btn btn-light btn-outline-secondary" onClick={this.handleLogout}>Logout</button>
+                        </div>
+                            
                     </div>
                 </nav>
+                
 
             </React.Fragment>
         );

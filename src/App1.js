@@ -2,25 +2,38 @@ import './App.css';
 import NavBar from './components/navbar'
 import SideBar from './components/sidebar'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import React, { useState } from 'react';
-import SignIn from './components/pages/signin';
+import React, { useState,useEffect } from 'react';
+//import SignIn from './components/pages/signin';
 import SignUp from './components/pages/signup';
 import Homepage from './components/pages/homepage';
 import ForgotPassword from './components/pages/forgot-password';
-import Login from './components/pages/login';
+import Logon from './components/pages/login';
 
 
-function App() {
+function App1() {
 
   const adminUser={
     email:"admin@admin.com",
     password:"Qwer@1234"
   }
 
-  const [user,setUser]=useState({email:"",password:""});
+  const [user,setUser]=useState({email:"",password:"",login:false,token:null});
   const [error,setError]=useState("");
+  
+
+//   useEffect(()=>{
+//     setUser(change);
+//     console.warn("Details set in User",user)
+// },[change]);
+
+
+ 
 
   const Login=details=>{
+
+    
+
+    
 
     console.log(details);
       if(details.email==adminUser.email && details.password==adminUser.password)
@@ -33,11 +46,13 @@ function App() {
       else
       console.log("details dont match");
 
+   
   }
 
   const Logout=()=>{
     console.log("Logout");
     setUser({email:""})
+    localStorage.removeItem("login");
   }
 
   return (
@@ -60,7 +75,7 @@ function App() {
           
         </div>
       ):
-      (<Route path='/' exact component={()=><SignIn Login={Login} error={error}/>}></Route>)
+      (<Route path='/' exact component={()=><Logon Login={Login} error={error}/>}></Route>)
       }
            
            <Route path='/signup' exact component={SignUp}></Route>
@@ -93,4 +108,4 @@ function App() {
 
 //(<Route path='/' exact component={()=><SignIn Login={Login} error={error}/>}></Route>)
 
-export default App;
+export default App1;

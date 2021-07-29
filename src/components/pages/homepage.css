@@ -1,0 +1,12 @@
+#asg {
+  color: blue;
+  background-color: rgb(241, 238, 238);
+  font-weight: 500;
+}
+#b {
+  color: blue;
+}
+#a {
+  /* padding-top: 100px; */
+  padding: 50px 100px 10px 100px; /*trbl*/
+}

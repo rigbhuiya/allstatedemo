@@ -53,23 +53,86 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignIn({Login,error}) {
+export default function Logon({Login,error}) {
 
-    const [details,setDetails]=useState({email:"",password:""});
+    const [details,setDetails]=useState({email:"",password:"",login:false,token:null});
+    let qwe;
     const [gdetails,setGDetails]=useState({email:"",password:""});
     //const [password,setPassword]=useState("");
     const classes = useStyles();
+
+    
 
     useEffect(()=>{
         Login(gdetails);
     },[gdetails]);
 
-    const handleSubmit=e=>{
+    // useEffect(()=>{
+    //     // let store=JSON.parse(localStorage.getItem('local'));
+    //     // setDetails({...details,token:store.token})
+    //     console.log("yoyo");
+    //    // console.log(store);
+    
+    // },[qwe]);
+
+    
+
+    const login=(e)=>{
+
         e.preventDefault();
+        
+        fetch('http://localhost:8085/authenticate',{
+            method:"POST",
+            headers: { 'Content-Type': 'application/json' },
+            body:JSON.stringify(details)
+        }).then((resp)=>
+        {
+            resp.json().then((result)=>
+            {
+                console.warn(result)
+
+                localStorage.setItem('login',JSON.stringify({
+                    token:result.jwt
+                }))
+
+               // setDetails({...details,token:result.jwt});
+
+
+
+               
+
+               qwe=result.jwt;
+                
+                
+
+                console.log(qwe);
+
+                setDetails({...details,token:result.jwt});
+                
+
+                
+
+                
+                console.log(details);
+            })
+
+            
+
+        })
 
         Login(details);
+          
+      
+            //console.warn("details",this.state);
+        console.log(details);
+            console.log("123");
+            console.log(qwe)
+        }
+
     
-     }
+
+
+    
 
      const responseGoogle=response=>{
          
@@ -97,7 +160,7 @@ export default function SignIn({Login,error}) {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form} onSubmit={handleSubmit}  >
+                <form className={classes.form} onSubmit={login}  >
                     <TextField
                         variant="outlined"
                         margin="normal"
